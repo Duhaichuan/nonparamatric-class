@@ -1,0 +1,62 @@
+---
+title: "HW#3"
+author: "Haichuan Du"
+date: "6/16/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(snpar)
+library(jmuOutlier) #For doing permutation tests.
+```
+##2
+```{r}
+perm.test8452=function(x,y){
+print(wilcox.test(x,y))
+print(ks.test(x,y))
+print(ansari.test(x,y))
+print(paste("Sample1:"))
+print(x)
+print(paste("Sample2:"))
+print(y)
+}
+```
+ 
+```{r}
+set.seed(23)
+x=rnorm(10)
+y=rnorm(10)
+perm.test8452(x,y)
+```
+
+##4
+```{r}
+#Ansari-Bradley  with a location shift.
+n=20 #Common sample size.
+nruns=1000 #Number of runs to do.
+nrej1=0 #For Ansari-Bradley test.
+
+for (i in 0:4) {
+  set.seed(0)
+  nrej1=0
+for (run in 1:nruns){
+  samp1=rnorm(n, 0, 1)
+  samp2=rnorm(n, 0, 1) + i
+  if (ansari.test(samp1,samp2)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated alpha for delta = ", i , "Ansari-Bradley is:", nrej1/nruns))}
+```
+Comment: As the delat get bigger, the appha get smaller. The Ansari-Bradley is invalid for different location from normal distributions, but it is valid and robust for equal centers from normal distributions.
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+---
+title: "HW#5"
+author: "Haichuan Du"
+date: "6/29/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#2  
+```{r}
+library(clinfun)
+library(jmuOutlier) 
+library(testforDEP) #Testing for dependency using Hoeffding's test and others.
+```
+
+```{r}
+x <- c(15.4, 13.5, 13.3, 12.4, 12.8, 13.5, 14.5, 13.9, 11.0, 15.0, 17.0, 13.8, 17.4, 16.5, 14.4)
+y <- c(16.5, 13.2, 13.6, 13.6, 14.0, 14.0, 16.0, 14.1, 11.5, 14.4, 16.0, 13.2, 16.6, 18.5, 14.5)
+plot(x,y,
+     main = "Nasal brushing Vs. Endobronchial forceps biopsy",
+     xlab = "Nasal brushing",
+     ylab = "Endobronchial forceps biopsy")
+
+#a)
+cor.test(x,y,method='kendall')  # p-value = 0.0002291
+
+#b)
+perm.cor.test(x,y,method='spearman')  #p-value = 0 
+
+#c)
+cor.test(x,y,method='pearson')    #   p-value = 3.012e-05
+
+#d)
+testforDEP(x,y,test='HOEFFD')   #p-value < 0.05
+```
+A scatterplot of the Nasal brushing Vs. Endobronchial forceps biopsy is given above. In viewing this plot, there is a fairly strong, positive, linear association between Nasal brushing and Endobronchial forceps biopsy.
+
+Ho: No association between Nasal brushing and Endobronchial forceps biopsy
+Ha: Some assoiation between Nasal brushing and Endobronchial forceps biopsy
+
+By comparing four different tests. We get all p values less than 0.05. Therefore, we reject Ho and conclude Ha, that is, we have enough evidence at 0.05 level to conclude that some assoiation between Nasal brushing and Endobronchial forceps biopsy.
+
+Kendall’s test, Spearman’s test, and permutation test are all designed to be sensitive to alternatives where Y increase with x or Y decreases with x, so it's not surprising to see that they have relatively small P values. Hoeffding’s test is not designed for detecting Monotone, but it still has good power to detect any kind of association given suffcient data.
+
+

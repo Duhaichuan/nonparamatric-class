@@ -1,0 +1,128 @@
+---
+title: "Math_8452_hw1"
+author: "Haichuan Du"
+date: "6/3/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Size 5
+```{r}
+#First under the null hypothesis.
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=5, rate = 1)
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated alpha is:", nrej1/nruns))
+
+#Now under an alternative.
+shift=0.5
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=5, rate = 1) + shift
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated power is:", nrej1/nruns))
+```
+
+Size 10
+```{r}
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=10, rate = 1)
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated alpha is:", nrej1/nruns))
+
+#Now under an alternative.
+shift=0.5
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=10, rate = 1) + shift
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated power is:", nrej1/nruns))
+```
+
+Size 20
+```{r}
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=20, rate = 1)
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated alpha is:", nrej1/nruns))
+
+#Now under an alternative.
+shift=0.5
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=20, rate = 1) + shift
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated power is:", nrej1/nruns))
+```
+
+size 35
+```{r}
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=35, rate = 1)
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated alpha is:", nrej1/nruns))
+
+#Now under an alternative.
+shift=0.5
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=35, rate = 1) + shift
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated power is:", nrej1/nruns))
+```
+
+Size 50
+```{r}
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=50, rate = 1)
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated alpha is:", nrej1/nruns))
+
+#Now under an alternative.
+shift=0.5
+set.seed(0) 
+nruns=1000
+nrej1=0
+nrej2=0
+for (run in 1:nruns){
+  x=rexp(n=50, rate = 1) + shift
+  if (t.test(x, mu=1)$p.value<0.05){nrej1=nrej1+1}}
+print(paste("Estimated power is:", nrej1/nruns))
+```
+Comment:
+The t-test is invalid for small samples from non-normal distributions, but it is valid for large samples from non-normal distributions. Non-normal population distributions, especially those that are thick-tailed 
+or heavily skewed, considerably reduce the power of the test. Therefore, the test is robust when the sample size is large enough
